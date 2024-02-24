@@ -4,13 +4,13 @@ using System.Text;
 
 namespace CommonLayer.RequestModel
 {
-    public class LoginModel
+    public class LoginModel : RegisterModel
     {
-        // For UserName values
-        public string UserName { get; set; }
+        // For UserEmail values
+        public string User_Email { get; set; }
 
         // For PassWord
-        public string UserPassword { get; set; }
+        public string User_Passwords { get; set; }
 
     }
 }
