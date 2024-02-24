@@ -1,0 +1,9 @@
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\bin\Debug\netcoreapp3.1\CommonLayer.deps.json
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\bin\Debug\netcoreapp3.1\CommonLayer.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\bin\Debug\netcoreapp3.1\CommonLayer.pdb
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.AssemblyInfoInputs.cache
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.AssemblyInfo.cs
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.pdb
