@@ -30,5 +30,21 @@ namespace FunDoNotes.Controllers
                 return BadRequest(new ResponseModel<UserEntity> { Success = false, Message = "Register Failed", Data = response });
             }
         }
+
+        [HttpPost]
+        [Route("Login")]
+        public ActionResult Login(LoginModel model)
+        {
+            UserEntity response = userManager.UserLogin(model);
+
+            if (response != null)
+            {
+                return Ok(new ResponseModel<UserEntity> { Success = true, Message = "Login Successfull", Data = response });
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<UserEntity> { Success = false, Message = "Login Failed", Data = response });
+            }
+        }
     }
 }
