@@ -3,6 +3,8 @@ using RepositoryLayer.Enitity;
 using CommonLayer.RequestModel;
 using RepositoryLayer.Interface;
 using System;
+using Microsoft.EntityFrameworkCore.Internal;
+using System.Linq;
 
 namespace RepositoryLayer.Services
 {
@@ -17,6 +19,10 @@ namespace RepositoryLayer.Services
 
         public UserEntity UserRegistration(RegisterModel model)
         {
+            if (context.UserTable.Any(user => user.UserEmail == model.UserEmail))
+            {
+                throw new Exception("Email Address already exist");
+            }
             UserEntity userEntity = new UserEntity();
             userEntity.FirstName = model.FirstName;
             userEntity.LastName = model.LastName;
@@ -32,27 +38,34 @@ namespace RepositoryLayer.Services
         public UserEntity UserLogin(LoginModel model)
         {
             UserEntity userEntity = new UserEntity();
-            if (userEntity.UserEmail != null)
+            try
             {
-                if (userEntity.UserEmail == model.User_Email)
+                if (userEntity.UserEmail != null)
                 {
-                    if (userEntity.UserPassword == model.UserPassword)
+                    if (userEntity.UserEmail == model.User_Email)
                     {
-                        return userEntity;
+                        if (userEntity.UserPassword == model.UserPassword)
+                        {
+                            return userEntity;
+                        }
+                        else
+                        {
+                            throw new Exception("Invalid Password");
+                        }
                     }
                     else
                     {
-                        throw new Exception("Invalid Password");
+                        throw new Exception("Invalid UserName,Create new Account or Add ");
                     }
                 }
                 else
                 {
-                    throw new Exception("Invalid UserName,Create new Account or Add ");
+                    return null;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                return null;
+                throw;
             }
         }
     }
