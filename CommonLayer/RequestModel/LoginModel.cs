@@ -9,7 +9,7 @@ namespace CommonLayer.RequestModel
         // For UserEmail values
         public string User_Email { get; set; }
 
-        // For PassWord
+        // For User PassWord 
         public string User_Passwords { get; set; }
 
     }
