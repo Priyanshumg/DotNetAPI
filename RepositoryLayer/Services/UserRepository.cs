@@ -2,6 +2,7 @@
 using RepositoryLayer.Enitity;
 using CommonLayer.RequestModel;
 using RepositoryLayer.Interface;
+using System;
 
 namespace RepositoryLayer.Services
 {
@@ -25,6 +26,34 @@ namespace RepositoryLayer.Services
             context.UserTable.Add(userEntity);
             context.SaveChanges();
             return userEntity;
+        }
+
+
+        public UserEntity UserLogin(LoginModel model)
+        {
+            UserEntity userEntity = new UserEntity();
+            if (userEntity.UserEmail != null)
+            {
+                if (userEntity.UserEmail == model.User_Email)
+                {
+                    if (userEntity.UserPassword == model.UserPassword)
+                    {
+                        return userEntity;
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid Password");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid UserName,Create new Account or Add ");
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
