@@ -5,9 +5,11 @@ using RepositoryLayer.Interface;
 using System;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Linq;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
-using System.Security.Cryptography;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Configuration;using System.Security.Cryptography;
 using System.IO;
 using System.Collections.Generic;
 
@@ -16,9 +18,10 @@ namespace RepositoryLayer.Services
     public class UserRepository : IUserInterface
     {
         private readonly UserContext context;
-
+        private readonly IConfiguration _config;
         private static readonly byte[] key = new byte[] { 0x45, 0x6F, 0x3F, 0x12, 0x98, 0xAB, 0xCD, 0xEF, 0x45, 0x6F, 0x3F, 0x12, 0x98, 0xAB, 0xCD, 0xEF };
         private static readonly byte[] iv = new byte[] { 0x45, 0x6F, 0x3F, 0x12, 0x98, 0xAB, 0xCD, 0xEF, 0x45, 0x6F, 0x3F, 0x12, 0x98, 0xAB, 0xCD, 0xEF };
+        
         public UserRepository(UserContext context)
         {
             this.context = context;
@@ -27,9 +30,7 @@ namespace RepositoryLayer.Services
         public UserEntity UserRegistration(RegisterModel model)
         {
             if (context.UserTable.Any(user => user.UserEmail == model.UserEmail))
-            {
-                throw new Exception("Email Address already exist");
-            }
+            {throw new Exception("Email Address already exist");}
             UserEntity userEntity = new UserEntity();
             userEntity.FirstName = model.FirstName;
             userEntity.LastName = model.LastName;
@@ -50,7 +51,7 @@ namespace RepositoryLayer.Services
             {
                 if (userEntity.UserEmail != null)
                 {
-                    if (userEntity.UserEmail == model.User_Email)
+                    if (userEntity.UserEmail == model.UserEmail)
                     {
                         // if (userEntity.UserPassword == model.UserPassword)
                         // {
@@ -80,6 +81,22 @@ namespace RepositoryLayer.Services
                 throw ex;
             }
         }
+
+        private string GenerateToken(string Email, string UserId)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new[]
+            {
+                new Claim("Email",Email),
+                new Claim("UserId", UserId)
+            };
+            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+                _config["Jwt:Audience"],
+                claims,
+                expires: DateTime.Now.AddHours(15),
+                signingCredentials: credentials);
+            return new JwtSecurityTokenHandler().WriteToken(token);
 
         public static string Encrypt(string UserPassword)
         {
