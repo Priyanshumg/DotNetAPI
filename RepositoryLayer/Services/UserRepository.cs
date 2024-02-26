@@ -59,6 +59,9 @@ namespace RepositoryLayer.Services
                         // }
                         if (Decrypt(userEntity.UserPassword) == model.User_Passwords)
                         {
+                            string token = GenerateToken(userEntity.UserEmail, userEntity.UserId);
+                            // Attach token to user entity or return it along with userEntity
+                            userEntity.Token= token;
                             return userEntity;
                         }
                         else
@@ -89,7 +92,7 @@ namespace RepositoryLayer.Services
             var claims = new[]
             {
                 new Claim("Email",Email),
-                new Claim("UserId", UserId)
+                new Claim("UserId", Convert.ToString(UserId))
             };
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Audience"],

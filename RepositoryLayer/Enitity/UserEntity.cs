@@ -26,5 +26,8 @@ namespace RepositoryLayer.Enitity
 
         [Required]
         public string UserPassword { get; set; }
+
+        [NotMapped]
+        public string Token { get; set; }
     }
 }
