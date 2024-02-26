@@ -51,9 +51,7 @@ namespace RepositoryLayer.Services
                         {
                             string token = GenerateToken(userEntity.UserEmail, userEntity.UserId);
                             // Attach token to user entity or return it along with userEntity
-                            userEntity.Token = token;
-                            return userEntity;
-
+                            userEntity.Token= token;
                             return userEntity;
                         }
                         else
@@ -76,14 +74,14 @@ namespace RepositoryLayer.Services
                 throw ex;
             }
         }
-        private string GenerateToken(string Email, string UserId)
+        private string GenerateToken(string Email, int UserId)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
                 new Claim("Email",Email),
-                new Claim("UserId", UserId)
+                new Claim("UserId", Convert.ToString(UserId))
             };
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Audience"],
