@@ -7,3 +7,4 @@ C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\obj
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.csproj.CoreCompileInputs.cache
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.dll
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.pdb
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.sourcelink.json
