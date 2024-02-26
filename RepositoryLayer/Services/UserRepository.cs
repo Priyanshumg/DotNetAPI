@@ -25,9 +25,7 @@ namespace RepositoryLayer.Services
         public UserEntity UserRegistration(RegisterModel model)
         {
             if (context.UserTable.Any(user => user.UserEmail == model.UserEmail))
-            {
-                throw new Exception("Email Address already exist");
-            }
+            {throw new Exception("Email Address already exist");}
             UserEntity userEntity = new UserEntity();
             userEntity.FirstName = model.FirstName;
             userEntity.LastName = model.LastName;
@@ -88,7 +86,6 @@ namespace RepositoryLayer.Services
                 expires: DateTime.Now.AddHours(15),
                 signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);
-
         }
     }
 }
