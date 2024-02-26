@@ -49,6 +49,11 @@ namespace RepositoryLayer.Services
                     {
                         if (userEntity.UserPassword == model.UserPassword)
                         {
+                            string token = GenerateToken(userEntity.UserEmail, userEntity.UserId);
+                            // Attach token to user entity or return it along with userEntity
+                            userEntity.Token = token;
+                            return userEntity;
+
                             return userEntity;
                         }
                         else
@@ -68,7 +73,7 @@ namespace RepositoryLayer.Services
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
         private string GenerateToken(string Email, string UserId)
