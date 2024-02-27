@@ -14,3 +14,4 @@ C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\RepositoryLayer
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\RepositoryLayer\bin\Debug\netcoreapp3.1\CommonLayer.dll
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\RepositoryLayer\bin\Debug\netcoreapp3.1\CommonLayer.pdb
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.csproj.CopyComplete
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.sourcelink.json

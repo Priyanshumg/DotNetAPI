@@ -34,6 +34,7 @@ namespace FunDoNotes
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration["ConnectionStrings:dbconnection"];
+            services.AddSwaggerGen();
             services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
             services.AddTransient<IUserInterface, UserRepository>();
             services.AddTransient<IUserManager, UserManager>();
@@ -59,6 +60,13 @@ namespace FunDoNotes
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Test1 Api v1");
+            });
+
         }
     }
 }
