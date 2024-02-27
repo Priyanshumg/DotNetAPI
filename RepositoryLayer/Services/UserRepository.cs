@@ -107,7 +107,7 @@ namespace RepositoryLayer.Services
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
-                new Claim("Email",Email),
+                new Claim("UserEmail",Email),
                 new Claim("UserId", Convert.ToString(UserId))
             };
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
