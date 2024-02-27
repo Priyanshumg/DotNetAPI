@@ -50,6 +50,7 @@ namespace FunDoNotes
                 });
                 option.AddSecurityRequirement(new OpenApiSecurityRequirement
  {
+
         {
             new OpenApiSecurityScheme
             {
