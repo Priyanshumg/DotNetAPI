@@ -85,7 +85,23 @@ namespace RepositoryLayer.Services
             }
         }
 
-        private string GenerateToken(string Email, string UserId)
+        public bool ResetPassword(string Email, ResetPasswordModel resetPassWordModel)
+        {
+            UserEntity user = context.UserTable.ToList().Find(user => user.UserEmail == Email);
+            if (user.UserEmail == resetPassWordModel.UserEmail)
+            {
+                user.UserPassword = Encrypt(resetPassWordModel.ConfirmPassword);
+                user.ChangedAt = DateTime.Now;
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private string GenerateToken(string Email, int UserId)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -100,6 +116,7 @@ namespace RepositoryLayer.Services
                 expires: DateTime.Now.AddHours(15),
                 signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
 
         public static string Encrypt(string UserPassword)
         {
