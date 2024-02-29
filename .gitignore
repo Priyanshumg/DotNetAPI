@@ -176,7 +176,3 @@ ASALocalRun/
 .mfractor/
 # Local History for Visual Studio
 .localhistory/
-/CommonLayer/obj/Debug/netcoreapp3.1/CommonLayer.csproj.BuildWithSkipAnalyzers
-/CommonLayer/obj/Debug/netcoreapp3.1/CommonLayer.sourcelink.json
-/ManagerLayer/obj/Debug/netcoreapp3.1/ManagerLayer.sourcelink.json
-/RepositoryLayer/obj/Debug/netcoreapp3.1/RepositoryLayer.sourcelink.json

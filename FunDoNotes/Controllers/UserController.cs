@@ -72,51 +72,5 @@ namespace FunDoNotes.Controllers
                 throw ex;
             }
         }
-
-        [Authorize]
-        [HttpPost]
-        [Route("ResetPassword")]
-        public ActionResult ResetPassword(ResetPasswordModel reset)
-        {
-            try
-            {
-                string Email = User.FindFirst("UserEmail").Value;
-                if (userManager.ResetPassword(Email, reset))
-                {
-                    return Ok(new ResponseModel<bool> { Success= true, Message= "Password Reset", Data= false});
-                }
-                else
-                {
-                    return BadRequest(new ResponseModel<bool> { Success = false, Message = "Password cannot be reset", Data = true });
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        [Authorize]
-        [HttpPost]
-        [Route("ResetPassword")]
-        public ActionResult ResetPassword(ResetPasswordModel reset)
-        {
-            try
-            {
-                string Email = User.FindFirst("UserEmail").Value;
-                if (userManager.ResetPassword(Email, reset))
-                {
-                    return Ok(new ResponseModel<bool> { Success= true, Message= "Password Reset", Data= false});
-                }
-                else
-                {
-                    return BadRequest(new ResponseModel<bool> { Success = false, Message = "Password cannot be reset", Data = true });
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
     }
 }
