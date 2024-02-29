@@ -21,14 +21,14 @@ namespace ManagerLayer.Services
             return repository.UserRegistration(model);
         }
 
-        public UserEntity UserLogin(LoginModel model)
+        public string UserLogin(LoginModel model)
         {
             return repository.UserLogin(model);
         }
 
-        public bool ResetPassword(string Email, ResetPasswordModel resetPassWordModel)
+        public bool ResetPassword(string Email, ResetPasswordModel model)
         {
-            return repository.ResetPassword(Email, resetPassWordModel);
+            return repository.ResetPassword(Email, model);
         }
     }
 }

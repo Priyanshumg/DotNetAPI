@@ -38,15 +38,15 @@ namespace FunDoNotes.Controllers
         [Route("Login")]
         public ActionResult Login(LoginModel model)
         {
-            UserEntity response = userManager.UserLogin(model);
+            string response = userManager.UserLogin(model);
 
             if (response != null)
             {
-                return Ok(new ResponseModel<UserEntity> { Success = true, Message = "Login Successfull", Data = response });
+                return Ok(new ResponseModel<string> { Success = true, Message = "Login Successfull", Data = response });
             }
             else
             {
-                return BadRequest(new ResponseModel<UserEntity> { Success = false, Message = "Login Failed", Data = response });
+                return BadRequest(new ResponseModel<string> { Success = false, Message = "Login Failed", Data = response });
             }
         }
 
