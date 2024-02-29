@@ -9,8 +9,8 @@ namespace ManagerLayer.Interface
     public interface IUserManager
     {
         public UserEntity UserRegistration(RegisterModel model);
-        public UserEntity UserLogin(LoginModel model);
-        public bool ResetPassword(string Email, ResetPasswordModel resetPassWordModel);
+        public string UserLogin(LoginModel model);
+        public bool ResetPassword(string Email, ResetPasswordModel model);
     }
 }
     
