@@ -176,14 +176,3 @@ ASALocalRun/
 .mfractor/
 # Local History for Visual Studio
 .localhistory/
-
-/CommonLayer/obj/
-/FunDoNotes/obj/
-/ManagerLayer/obj/
-/RepositoryLayer/obj
-
-/CommonLayer/bin/
-/ManagerLayer/bin/
-/RepositoryLayer/bin
-/FunDoNotes/bin/
-
