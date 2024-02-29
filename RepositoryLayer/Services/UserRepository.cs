@@ -22,9 +22,10 @@ namespace RepositoryLayer.Services
         private static readonly byte[] key = new byte[] { 0x45, 0x6F, 0x3F, 0x12, 0x98, 0xAB, 0xCD, 0xEF, 0x45, 0x6F, 0x3F, 0x12, 0x98, 0xAB, 0xCD, 0xEF };
         private static readonly byte[] iv = new byte[] { 0x45, 0x6F, 0x3F, 0x12, 0x98, 0xAB, 0xCD, 0xEF, 0x45, 0x6F, 0x3F, 0x12, 0x98, 0xAB, 0xCD, 0xEF };
         
-        public UserRepository(UserContext context)
+        public UserRepository(UserContext context, IConfiguration _config)
         {
             this.context = context;
+            this._config = _config;
         }
 
         public UserEntity UserRegistration(RegisterModel model)
@@ -36,7 +37,7 @@ namespace RepositoryLayer.Services
             userEntity.LastName = model.LastName;
             userEntity.UserName = model.UserName;
             userEntity.UserEmail = model.UserEmail;
-            // userEntity.UserPassword = model.UserPassword;
+            // userEntity.UserPassword = model.UserPassword;+
             userEntity.UserPassword = Encrypt(model.UserPassword);
             context.UserTable.Add(userEntity);
             context.SaveChanges();
@@ -44,39 +45,27 @@ namespace RepositoryLayer.Services
         }
 
 
-        public UserEntity UserLogin(LoginModel model)
+        public string UserLogin(LoginModel model)
         {
-            UserEntity userEntity = new UserEntity();
             try
             {
-                if (userEntity.UserEmail != null)
+                UserEntity user = context.UserTable.ToList().Find(x => x.UserEmail == model.User_Email);
+                if (user != null)
                 {
-                    if (userEntity.UserEmail == model.UserEmail)
+                    if (Decrypt(user.UserPassword) == model.User_Passwords)
                     {
-                        // if (userEntity.UserPassword == model.UserPassword)
-                        // {
-                        //     return userEntity;
-                        // }
-                        if (Decrypt(userEntity.UserPassword) == model.User_Passwords)
-                        {
-                            string token = GenerateToken(userEntity.UserEmail, userEntity.UserId);
-                            // Attach token to user entity or return it along with userEntity
-                            userEntity.Token= token;
-                            return userEntity;
-                        }
-                        else
-                        {
-                            throw new Exception("Invalid Password");
-                        }
+                        string token = GenerateToken(user.UserEmail, user.UserId);
+                        // Attach token to user entity or return it along with userEntity
+                        return token;
                     }
                     else
                     {
-                        throw new Exception("Invalid UserName,Create new Account or Add ");
+                        throw new Exception("Invalid Password");
                     }
                 }
                 else
                 {
-                    return null;
+                    throw new Exception("Invalid UserName,Create new Account or Add ");
                 }
             }
             catch (Exception ex)
@@ -85,21 +74,23 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public bool ResetPassword(string Email, ResetPasswordModel resetPassWordModel)
-        {
-            UserEntity user = context.UserTable.ToList().Find(user => user.UserEmail == Email);
-            if (user.UserEmail == resetPassWordModel.UserEmail)
-            {
-                user.UserPassword = Encrypt(resetPassWordModel.ConfirmPassword);
-                user.ChangedAt = DateTime.Now;
-                context.SaveChanges();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+
+        //public bool ResetPassword(string Email, ResetPasswordModel resetPassWordModel)
+        //{
+        //    UserEntity user = context.UserTable.ToList().Find(user => user.UserEmail == Email);
+        //    if (user.UserEmail == resetPassWordModel.UserEmail)
+        //    {
+        //        user.UserPassword = Encrypt(resetPassWordModel.ConfirmPassword);
+        //        user.ChangedAt = DateTime.Now;
+        //        context.SaveChanges();
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+
 
         private string GenerateToken(string Email, int UserId)
         {
@@ -131,6 +122,36 @@ namespace RepositoryLayer.Services
             using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
             {
                 swEncrypt.Write(UserPassword);
+            }
+            return Convert.ToBase64String(msEncrypt.ToArray());
+        }
+
+        public static string Decrypt(string cipherText)
+        {
+            using Aes aesAlg = Aes.Create();
+            aesAlg.Key = key;
+            aesAlg.IV = iv;
+
+            ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+            using MemoryStream msDecrypt = new MemoryStream(Convert.FromBase64String(cipherText));
+            using CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
+            using StreamReader srDecrypt = new StreamReader(csDecrypt);
+            return srDecrypt.ReadToEnd();
+        }
+
+        public bool ResetPassword(string Email, ResetPasswordModel model)
+        {
+            UserEntity user = context.UserTable.ToList().Find(user => user.UserEmail == Email);
+            if (user != null)
+            {
+                user.UserPassword = Encrypt(model.newPassword);
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
             }
             return Convert.ToBase64String(msEncrypt.ToArray());
         }
