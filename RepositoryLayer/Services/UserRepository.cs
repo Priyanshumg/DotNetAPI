@@ -12,6 +12,9 @@ using System.Text;
 using Microsoft.Extensions.Configuration;using System.Security.Cryptography;
 using System.IO;
 using System.Collections.Generic;
+using System.Net.Mail;
+using System.Net;
+
 
 namespace RepositoryLayer.Services
 {
@@ -122,17 +125,20 @@ namespace RepositoryLayer.Services
             return srDecrypt.ReadToEnd();
         }
 
-        public string ForgetPassword(string UserEmail)
+        public ForgetPasswordModel ForgetPassword(string UserEmail)
         {
-            UserEntity user = context.UserTable.Find(UserEmail);
+            UserEntity user = context.UserTable.FirstOrDefault(x => x.UserEmail == UserEmail);
             if (user != null)
             {
-                string token = GenerateToken(user.UserEmail, user.UserId);
-                return "Token Sent Successfully";
+                ForgetPasswordModel model = new ForgetPasswordModel();
+                model.UserEmail = UserEmail;
+                model.UserId = user.UserId;
+                model.token = GenerateToken(UserEmail, user.UserId);
+                return model;
             }
             else
             {
-                return null;
+                throw new Exception();  
             }
         }
 
