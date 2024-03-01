@@ -12,6 +12,9 @@ using System.Text;
 using Microsoft.Extensions.Configuration;using System.Security.Cryptography;
 using System.IO;
 using System.Collections.Generic;
+using System.Net.Mail;
+using System.Net;
+
 
 namespace RepositoryLayer.Services
 {
@@ -74,24 +77,6 @@ namespace RepositoryLayer.Services
             }
         }
 
-
-        //public bool ResetPassword(string Email, ResetPasswordModel resetPassWordModel)
-        //{
-        //    UserEntity user = context.UserTable.ToList().Find(user => user.UserEmail == Email);
-        //    if (user.UserEmail == resetPassWordModel.UserEmail)
-        //    {
-        //        user.UserPassword = Encrypt(resetPassWordModel.ConfirmPassword);
-        //        user.ChangedAt = DateTime.Now;
-        //        context.SaveChanges();
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
-
         private string GenerateToken(string Email, int UserId)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -140,6 +125,23 @@ namespace RepositoryLayer.Services
             return srDecrypt.ReadToEnd();
         }
 
+        public ForgetPasswordModel ForgetPassword(string UserEmail)
+        {
+            UserEntity user = context.UserTable.FirstOrDefault(x => x.UserEmail == UserEmail);
+            if (user != null)
+            {
+                ForgetPasswordModel model = new ForgetPasswordModel();
+                model.UserEmail = UserEmail;
+                model.UserId = user.UserId;
+                model.token = GenerateToken(UserEmail, user.UserId);
+                return model;
+            }
+            else
+            {
+                throw new Exception();  
+            }
+        }
+
         public bool ResetPassword(string Email, ResetPasswordModel model)
         {
             UserEntity user = context.UserTable.ToList().Find(user => user.UserEmail == Email);
@@ -153,21 +155,6 @@ namespace RepositoryLayer.Services
             {
                 return false;
             }
-            return Convert.ToBase64String(msEncrypt.ToArray());
-        }
-
-        public static string Decrypt(string cipherText)
-        {
-            using Aes aesAlg = Aes.Create();
-            aesAlg.Key = key;
-            aesAlg.IV = iv;
-
-            ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
-
-            using MemoryStream msDecrypt = new MemoryStream(Convert.FromBase64String(cipherText));
-            using CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
-            using StreamReader srDecrypt = new StreamReader(csDecrypt);
-            return srDecrypt.ReadToEnd();
         }
     }
 }
