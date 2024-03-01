@@ -7,6 +7,10 @@ using RepositoryLayer.Enitity;
 using System.Diagnostics;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using MassTransit;
+using System.Threading.Tasks;
+using ManagerLayer.Services;
+using CommonLayer.Utilities;
 
 namespace FunDoNotes.Controllers
 {
@@ -15,9 +19,11 @@ namespace FunDoNotes.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserManager userManager;
-        public UserController(IUserManager userManager)
+        private readonly IBus bus;
+        public UserController(IUserManager userManager, IBus bus)
         {
             this.userManager = userManager;
+            this.bus = bus;
         }
         [HttpPost]
         [Route("Reg")]
@@ -60,11 +66,19 @@ namespace FunDoNotes.Controllers
                 string Email = User.FindFirst("UserEmail").Value;
                 if (userManager.ResetPassword(Email, reset))
                 {
-                    return Ok(new ResponseModel<bool> { Success= true, Message= "Password Reset", Data= false});
+                    return Ok(new ResponseModel<bool> { 
+                        Success= true,
+                        Message= "Password Reset", 
+                        Data= true
+                    }
+                    );
                 }
                 else
                 {
-                    return BadRequest(new ResponseModel<bool> { Success = false, Message = "Password cannot be reset", Data = true });
+                    return BadRequest(new ResponseModel<bool> { 
+                        Success = false,
+                        Message = "Password cannot be reset",
+                        Data = true });
                 }
             }
             catch (Exception ex)
@@ -72,5 +86,34 @@ namespace FunDoNotes.Controllers
                 throw ex;
             }
         }
+        [HttpPost("ForgetPassword")]
+        public async Task<ActionResult> ForgetPassword(string Email)
+        {
+            try
+            {
+                if (Email != null)
+                {
+                    SendMail sendMail = new SendMail();
+                    ForgetPasswordModel token = userManager.ForgetPassword(Email);
+                    sendMail.SendEmail(Email, token);
+                    Uri uri = new Uri("rabbitmq://localhost/FundooNotesEmailQueue");
+                    var endPoint = await bus.GetSendEndpoint(uri);
+
+                    await endPoint.Send(token);
+
+                    return Ok(new ResponseModel<string> { Success = true, Message = "Mail Sent Successfully", Data = token.token });
+                }
+                else
+                {
+                    return BadRequest(new ResponseModel<string> { Success = false, Message = "Email Doesn't Exist", Data = "else part is executed" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseModel<string> { Success = false, Message = ex.Message, Data = "" });
+            }
+
+        }
+
     }
 }
