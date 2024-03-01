@@ -63,3 +63,13 @@ C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\obj\Debug\netcoreapp3.1\FunDoNotes.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\obj\Debug\netcoreapp3.1\FunDoNotes.sourcelink.json
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\Automatonymous.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\GreenPipes.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\MassTransit.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\MassTransit.AspNetCoreIntegration.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\MassTransit.ExtensionsDependencyInjectionIntegration.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\MassTransit.RabbitMqTransport.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\Microsoft.Extensions.PlatformAbstractions.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\NewId.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\RabbitMQ.Client.dll

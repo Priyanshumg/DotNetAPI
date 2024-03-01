@@ -6,7 +6,7 @@ namespace CommonLayer.RequestModel
 {
     public class ResetPasswordModel
     {
-        public string UserEmail;
-        public string newPassword;
+        //public string UserEmail;
+        public string newPassword { get; set; }
     }
 }
