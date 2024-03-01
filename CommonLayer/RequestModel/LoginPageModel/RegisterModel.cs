@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace CommonLayer.RequestModel
+namespace CommonLayer.RequestModel.LoginPageModel
 {
     public class RegisterModel
     {
