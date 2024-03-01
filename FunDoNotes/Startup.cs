@@ -87,6 +87,9 @@ namespace FunDoNotes
             services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
             services.AddTransient<IUserInterface, UserRepository>();
             services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<INotesManager, NotesManager>();
+            services.AddTransient<INotesInterface, NotesRepository>();
+
 
             services.AddControllers();
 
