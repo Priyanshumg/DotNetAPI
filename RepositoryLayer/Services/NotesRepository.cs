@@ -1,20 +1,43 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using CommonLayer.RequestModel.NotesModel;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Configuration;
 using RepositoryLayer.Context;
+using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Principal;
 using System.Text;
 
-namespace RepositoryLayer.Services
+namespace Repository.Services
 {
-    public class NotesRepository : INotesInterface
+    public class NoteRepository : INotesInterface
     {
         private readonly UserContext context;
-        private readonly IConfiguration _config;
-        public NotesRepository(UserContext context, IConfiguration _config)
+        public NoteRepository(UserContext context)
         {
             this.context = context;
-            this._config = _config;
         }
+        public NotesEntity CreateNote(CreateNotes model, int Id)
+        {
+            NotesEntity entity = new NotesEntity();
+            entity.NotesId = Id;
+            entity.Title = model.Title;
+            entity.Description = model.Description;
+            entity.Colour = model.Colour;
+            entity.Image = model.Image;
+            entity.IsArchive = model.IsArchive;
+            entity.IsPin = model.IsPin;
+            entity.ISTrash = model.IsTrash;
+            entity.CreatedAt = DateTime.UtcNow;
+            entity.UpdatedAt = DateTime.UtcNow;
+            context.NotesTable.Add(entity);
+            context.SaveChanges();
+            return entity;
+        }
+        
     }
 }
