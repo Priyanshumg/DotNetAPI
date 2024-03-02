@@ -10,6 +10,6 @@ namespace RepositoryLayer.Interface
     public interface INotesInterface
     {
         public NotesEntity CreateNote(CreateNotes model, int Id);
-        public List<NotesEntity> GetNote(int id);
+        public List<NotesEntity> GetAllNote(int id);
     }
 }
