@@ -56,5 +56,23 @@ namespace Repository.Services
             }
             return null;
         }
+        public NotesEntity Trash(int NotesId)
+        {
+            var trash = context.NotesTable.FirstOrDefault(o => o.NotesId == NotesId);
+            if (trash != null)
+            {
+                if (trash.ISTrash)
+                {
+                    trash.ISTrash = false;
+                    context.SaveChanges();
+
+                }
+                else
+                {
+                    trash.ISTrash = true;
+                }
+            }
+            return trash;
+        }
     }
 }

@@ -76,4 +76,23 @@ namespace FunDoNotes.Controllers
                 return BadRequest(new ResponseModel<NotesEntity> { Success = false, Message = "Update Note Failed", Data = response });
             }
         }
+        [Authorize]
+        [HttpPut]
+        [Route("Trash")]
+        public ActionResult Trash(int NotesId)
+        {
+
+            var response = noteManger.Trash(NotesId);
+            if (response != null)
+            {
+
+                return Ok(new ResponseModel<NotesEntity> { Success = true, Message = "Trash Note Success", Data = response });
+
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<NotesEntity> { Success = false, Message = "Trash Note Failed", Data = response });
+            }
+        }
+    }
 }
