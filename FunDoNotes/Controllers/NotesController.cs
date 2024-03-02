@@ -76,4 +76,5 @@ namespace FunDoNotes.Controllers
                 return BadRequest(new ResponseModel<NotesEntity> { Success = false, Message = "Update Note Failed", Data = response });
             }
         }
+    }
 }
