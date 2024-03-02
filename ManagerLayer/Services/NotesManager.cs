@@ -40,5 +40,10 @@ namespace ManagerLayer.Services
         {
             return repository.Archive(NotesId);
         }
+        public NotesEntity Colour(int NotesId)
+        {
+            return repository.Colour(NotesId);
+        }
+
     }
 }
