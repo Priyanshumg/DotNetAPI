@@ -74,5 +74,20 @@ namespace Repository.Services
             }
             return trash;
         }
+
+        public NotesEntity DeleteNote(int NotesId, int id)
+        {
+            var del = context.NotesTable.FirstOrDefault(o => (o.NotesId == NotesId && o.UserId == id));
+            if (del != null)
+            {
+                context.NotesTable.Remove(del);
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Invalid User Input");
+            }
+            return del;
+        }
     }
 }
