@@ -108,6 +108,17 @@ namespace Repository.Services
                 throw new Exception("IsArchive not found");
             }
         }
+        public NotesEntity Colour(int NotesId)
+        {
+            var color = context.NotesTable.FirstOrDefault(o => o.NotesId == NotesId);
+            if (color != null)
+            {
+                color.Colour = "Blue";
+                context.SaveChanges();
+            }
+            return color;
+
+        }
     }
 }
 
