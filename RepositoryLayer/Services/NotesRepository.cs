@@ -89,6 +89,27 @@ namespace Repository.Services
             }
             return deleted;
         }
+        public NotesEntity Archive(int NotesId)
+        {
+            var archive = context.NotesTable.FirstOrDefault(o => o.NotesId == NotesId);
+            if (archive != null)
+            {
+                if (archive.IsArchive)
+                {
+                    archive.IsArchive = false;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    archive.IsArchive = true;
+                }
+                return archive;
+            }
+            else
+            {
+                throw new Exception("IsArchive not found");
+            }
+        }
     }
 }
 
