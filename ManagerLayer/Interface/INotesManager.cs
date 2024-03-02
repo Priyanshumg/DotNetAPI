@@ -10,5 +10,6 @@ namespace ManagerLayer.Interface
     public interface INotesManager
     {
         public NotesEntity CreateNote(CreateNotes model, int Id);
+        public List<NotesEntity> GetAllNote(int id);
     }
 }
