@@ -21,6 +21,11 @@ namespace ManagerLayer.Services
         {
             return repository.CreateNote(model, Id);
         }
+        public List<NotesEntity> GetAllNote(int id)
+        {
+            return repository.GetAllNote(id);
+        }
+
     }
 
 }

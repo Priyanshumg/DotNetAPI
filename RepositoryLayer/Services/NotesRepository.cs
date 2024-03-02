@@ -38,6 +38,9 @@ namespace Repository.Services
             context.SaveChanges();
             return entity;
         }
-        
+        public List<NotesEntity> GetAllNote(int id)
+        {
+            return context.NotesTable.Where<NotesEntity>(a => a.UserId == id).ToList();
+        }
     }
 }
