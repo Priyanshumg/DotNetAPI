@@ -40,5 +40,23 @@ namespace FunDoNotes.Controllers
                 return BadRequest(new ResponseModel<NotesEntity> { Success = false, Message = "Create Note Failed", Data = response });
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("{id}", Name = "GetAllNote")]
+        public ActionResult FetchData(int id)
+        {
+            List<NotesEntity> data = noteManger.GetAllNote(id);
+            if (data != null)
+            {
+
+                return Ok(new ResponseModel<List<NotesEntity>> { Success = true, Message = "Get Note Successful", Data = data });
+
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<List<NotesEntity>> { Success = false, Message = "Get Note Failure", Data = null });
+            }
+        }
     }
 }
