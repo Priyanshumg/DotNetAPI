@@ -94,5 +94,31 @@ namespace FunDoNotes.Controllers
                 return BadRequest(new ResponseModel<NotesEntity> { Success = false, Message = "Trash Note Failed", Data = response });
             }
         }
+        [Authorize]
+        [HttpDelete]
+        [Route("Delete")]
+        public ActionResult DeleteNote(int NotesId, int id)
+        {
+
+            try
+            {
+                int idd = Convert.ToInt32(User.FindFirst("User Id").Value);
+                var response = noteManger.DeleteNoteOperation(NotesId, id);
+                if (response != null)
+                {
+
+                    return Ok(new ResponseModel<NotesEntity> { Success = true, Message = "Delete Note Success", Data = response });
+
+                }
+                else
+                {
+                    return BadRequest(new ResponseModel<NotesEntity> { Success = false, Message = "Delete Note Failed", Data = response });
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseModel<NotesEntity> { Success = false, Message = ex.Message, Data = null });
+            }
+        }
     }
 }
