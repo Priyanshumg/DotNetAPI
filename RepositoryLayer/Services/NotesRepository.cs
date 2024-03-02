@@ -42,5 +42,19 @@ namespace Repository.Services
         {
             return context.NotesTable.Where<NotesEntity>(a => a.UserId == id).ToList();
         }
+
+        public NotesEntity UpdateNote(int NotesId, UpdateNotesModel model)
+        {
+            var noteToUpdate = context.NotesTable.FirstOrDefault(note => note.NotesId == NotesId);
+            if (noteToUpdate != null)
+            {
+                noteToUpdate.Title = model.Title;
+                noteToUpdate.Description = model.Description;
+                noteToUpdate.UpdatedAt = DateTime.UtcNow;
+                context.SaveChanges();
+                return noteToUpdate;
+            }
+            return null;
+        }
     }
 }
