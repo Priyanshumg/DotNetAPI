@@ -14,8 +14,8 @@ namespace ManagerLayer.Interface
         public NotesEntity Trash(int NotesId);
         public NotesEntity DeleteNoteOperation(int NotesId);
         public NotesEntity Archive(int NotesId);
-        public NotesEntity Colour(int NotesId);
-        public NotesEntity Reminder(int NotesId);
+        public NotesEntity Colour(CreateNotes model, int NotesId);
+        public NotesEntity Reminder(CreateNotes model, int NotesId);
         public string UploadImage(string filepath, int NotesId, int Id);
     }
     public interface ILabelManager

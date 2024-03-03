@@ -110,24 +110,24 @@ namespace Repository.Services
                 throw new Exception("IsArchive not found");
             }
         }
-        public NotesEntity Colour(int NotesId)
+        public NotesEntity Colour(UpdateNotesModel model, int NotesId)
         {
             var color = context.NotesTable.FirstOrDefault(o => o.NotesId == NotesId);
             if (color != null)
             {
                 //color.Colour = "Blue";
-                color.Colour = "Green";
+                color.Colour = model.Colour;
                 context.SaveChanges();
             }
             return color;
 
         }
-        public NotesEntity Reminder(int NotesId)
+        public NotesEntity Reminder(CreateNotes model, int NotesId)
         {
             var remind = context.NotesTable.FirstOrDefault(o => o.NotesId == NotesId);
             if (remind != null)
             {
-                remind.Reminder = DateTime.UtcNow;
+                remind.Reminder = model.Reminder;
                 context.SaveChanges();
             }
             return remind;

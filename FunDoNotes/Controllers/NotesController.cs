@@ -97,7 +97,7 @@ namespace FunDoNotes.Controllers
         [Authorize]
         [HttpDelete]
         [Route("Delete")]
-        public ActionResult DeleteNote(int NotesId)
+        public ActionResult DeleteNote(CreateNotes model, int NotesId)
         {
             try
             {
@@ -158,10 +158,10 @@ namespace FunDoNotes.Controllers
         [Authorize]
         [HttpPut]
         [Route("Colour")]
-        public ActionResult Colour(int NotesId)
+        public ActionResult Colour(CreateNotes model, int NotesId)
         {
 
-            var response = noteManger.Colour(NotesId);
+            var response = noteManger.Colour(model, NotesId);
             if (response != null)
             {
                 return Ok(new ResponseModel<NotesEntity>
@@ -184,9 +184,9 @@ namespace FunDoNotes.Controllers
         [Authorize]
         [HttpPut]
         [Route("Remind")]
-        public ActionResult Remind(int NotesId)
+        public ActionResult Remind(CreateNotes model, int NotesId)
         {
-            var response = noteManger.Reminder(NotesId);
+            var response = noteManger.Reminder(model, NotesId);
             if (response != null)
             {
                 return Ok(new ResponseModel<NotesEntity> { Success = true, Message = "Reminder Note Success", Data = response });
