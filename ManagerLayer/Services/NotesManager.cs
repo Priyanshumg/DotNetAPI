@@ -53,4 +53,8 @@ namespace ManagerLayer.Services
             return repository.UploadImage(filepath, NotesId, Id);
         }
     }
+    public class LabelManager : ILabelManager
+    {
+        private readonly INotesInterface repository;
+    }
 }

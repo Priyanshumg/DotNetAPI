@@ -164,5 +164,13 @@ namespace Repository.Services
             catch (Exception ex) { return null; }
         }
     }
+    public class Label : ILabelNotesRepository
+    {
+        private readonly UserContext context;
+        public Label(UserContext context)
+        {
+            this.context = context;
+        }
+    }
 }
 

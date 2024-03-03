@@ -18,4 +18,8 @@ namespace ManagerLayer.Interface
         public NotesEntity Reminder(int NotesId);
         public string UploadImage(string filepath, int NotesId, int Id);
     }
+    public interface ILabelManager
+    {
+
+    }
 }
