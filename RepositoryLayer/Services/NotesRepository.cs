@@ -113,11 +113,22 @@ namespace Repository.Services
             var color = context.NotesTable.FirstOrDefault(o => o.NotesId == NotesId);
             if (color != null)
             {
-                color.Colour = "Blue";
+                //color.Colour = "Blue";
+                color.Colour = "Green";
                 context.SaveChanges();
             }
             return color;
 
+        }
+        public NotesEntity Reminder(int NotesId)
+        {
+            var remind = context.NotesTable.FirstOrDefault(o => o.NotesId == NotesId);
+            if (remind != null)
+            {
+                remind.Reminder = DateTime.UtcNow;
+                context.SaveChanges();
+            }
+            return remind;
         }
     }
 }
