@@ -19,7 +19,7 @@ namespace RepositoryLayer.Interface
         public string UploadImage(string filepath, int NotesId, int Id);
     }
 
-    public interface Label
+    public interface ILabelNotesRepository
     {
 
     }
