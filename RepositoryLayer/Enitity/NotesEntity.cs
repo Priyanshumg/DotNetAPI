@@ -24,6 +24,10 @@ namespace RepositoryLayer.Enitity
         [ForeignKey("User")]
         public int UserId { get; set; }
         // Navigation property
-        public UserEntity User { get; set; } 
+        public UserEntity User { get; set; }
+
+        [ForeignKey("Label")]
+        public int LabelId { get; set; }
+        public LabelEntity Label { get; set; }
     }
 }

@@ -9,11 +9,8 @@ namespace RepositoryLayer.Enitity
     public class LabelEntity
     {
         [Key]
-        public int LabelID {  get; set; }
+        public int LabelId {  get; set; }
 
-        public int LabelName {  get; set; }
-
-        [ForeignKey("NotesEntity")]
-        public int NotesId { get; set; }
+        public string LabelName {  get; set; }
     }
 }
