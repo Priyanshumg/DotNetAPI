@@ -1,28 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace RepositoryLayer.Enitity
 {
     public class NotesEntity
     {
         [Key]
-        public int NotesId;
-        public string Title;
-        public string Description;
-        public DateTime Reminder;
-        public string Colour;
-        public string Image;
-        public bool IsArchive;
-        public bool IsPin;
-        public bool ISTrash;
-        public DateTime CreatedAt;
-        public DateTime UpdatedAt;
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int NotesId { get; set; }
 
-        [ForeignKey("NotesUser")]
-        public int UserID;
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime Reminder { get; set; }
+        public string Colour { get; set; }
+        public string Image { get; set; }
+        public bool IsArchive { get; set; }
+        public bool IsPin { get; set; }
+        public bool ISTrash { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        // Navigation property
+        public UserEntity User { get; set; } 
     }
 }

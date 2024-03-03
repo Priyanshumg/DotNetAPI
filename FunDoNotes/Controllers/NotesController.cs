@@ -27,11 +27,10 @@ namespace FunDoNotes.Controllers
         [Route("Add")]
         public ActionResult AddNote(CreateNotes model)
         {
-            int id = Convert.ToInt32(User.FindFirst("User Id").Value);
-            var response = noteManger.CreateNote(model, id);
+            int UserId = Convert.ToInt32(User.FindFirst("UserId").Value);
+            var response = noteManger.CreateNote(model, UserId);
             if (response != null)
             {
-
                 return Ok(new ResponseModel<NotesEntity> { Success = true, Message = "Created Note Success", Data = response });
 
             }
@@ -44,9 +43,9 @@ namespace FunDoNotes.Controllers
         [Authorize]
         [HttpGet]
         [Route("{id}", Name = "GetAllNote")]
-        public ActionResult FetchData(int id)
+        public ActionResult FetchData(int UserId)
         {
-            List<NotesEntity> data = noteManger.GetAllNote(id);
+            List<NotesEntity> data = noteManger.GetAllNote(UserId);
             if (data != null)
             {
 
@@ -94,25 +93,37 @@ namespace FunDoNotes.Controllers
                 return BadRequest(new ResponseModel<NotesEntity> { Success = false, Message = "Trash Note Failed", Data = response });
             }
         }
+
         [Authorize]
         [HttpDelete]
         [Route("Delete")]
-        public ActionResult DeleteNote(int NotesId, int id)
+        public ActionResult DeleteNote(int NotesId)
         {
-
             try
             {
-                int idd = Convert.ToInt32(User.FindFirst("User Id").Value);
-                var response = noteManger.DeleteNoteOperation(NotesId, id);
+                int id = Convert.ToInt32(User.FindFirst("UserId").Value);
+                var response = noteManger.DeleteNoteOperation(NotesId);
                 if (response != null)
                 {
-
-                    return Ok(new ResponseModel<NotesEntity> { Success = true, Message = "Delete Note Success", Data = response });
-
+                    return Ok
+                        (new ResponseModel<NotesEntity>
+                            { 
+                            Success = true, 
+                            Message = "Deleted Note", 
+                            Data = response 
+                            }
+                        );
                 }
                 else
                 {
-                    return BadRequest(new ResponseModel<NotesEntity> { Success = false, Message = "Delete Note Failed", Data = response });
+                    return BadRequest
+                        (new ResponseModel<NotesEntity> 
+                            { 
+                                Success = false, 
+                                Message = "Failed Deleting Note", 
+                                Data = response 
+                            }
+                        );
                 }
             }
             catch (Exception ex)

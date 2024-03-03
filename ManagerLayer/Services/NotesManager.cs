@@ -32,9 +32,9 @@ namespace ManagerLayer.Services
         {
             return repository.Trash(NotesId);
         }
-        public NotesEntity DeleteNoteOperation(int NotesId, int id)
+        public NotesEntity DeleteNoteOperation(int NotesId)
         {
-            return repository.DeleteNoteOperation(NotesId, id);
+            return repository.DeleteNoteOperation(NotesId);
         }
         public NotesEntity Archive(int NotesId)
         {
