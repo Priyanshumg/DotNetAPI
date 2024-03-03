@@ -15,5 +15,6 @@ namespace RepositoryLayer.Interface
         public NotesEntity DeleteNoteOperation(int NotesId, int id);
         public NotesEntity Archive(int NotesId);
         public NotesEntity Colour(int NotesId);
+        public NotesEntity Reminder(int NotesId);
     }
 }

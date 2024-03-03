@@ -170,5 +170,20 @@ namespace FunDoNotes.Controllers
                 });
             }
         }
+        [Authorize]
+        [HttpPut]
+        [Route("Remind")]
+        public ActionResult Remind(int NotesId)
+        {
+            var response = noteManger.Reminder(NotesId);
+            if (response != null)
+            {
+                return Ok(new ResponseModel<NotesEntity> { Success = true, Message = "Reminder Note Success", Data = response });
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<NotesEntity> { Success = false, Message = "Reminder Note Failed", Data = response });
+            }
+        }
     }
 }
