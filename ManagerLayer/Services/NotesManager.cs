@@ -40,13 +40,13 @@ namespace ManagerLayer.Services
         {
             return repository.Archive(NotesId);
         }
-        public NotesEntity Colour(int NotesId)
+        public NotesEntity Colour(CreateNotes model,int NotesId)
         {
-            return repository.Colour(NotesId);
+            return repository.Colour(model,NotesId);
         }
-        public NotesEntity Reminder(int NotesId)
+        public NotesEntity Reminder(CreateNotes model, int NotesId)
         {
-            return repository.Reminder(NotesId);
+            return repository.Reminder(model, NotesId);
         }
         public string UploadImage(string filepath, int NotesId, int Id)
         {
