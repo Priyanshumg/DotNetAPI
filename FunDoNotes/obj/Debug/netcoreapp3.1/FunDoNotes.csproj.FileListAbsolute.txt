@@ -73,3 +73,7 @@ C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\NewId.dll
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\RabbitMQ.Client.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\NLog.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\NLog.Extensions.Logging.dll
+C:\Users\Dell\Desktop\locobuzz .net training\dotnetFrameworkAPIs\FunDoNotes\bin\Debug\netcoreapp3.1\NLog.Web.AspNetCore.dll

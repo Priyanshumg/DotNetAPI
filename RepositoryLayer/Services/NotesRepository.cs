@@ -21,26 +21,26 @@ namespace Repository.Services
         {
             this.context = context;
         }
-        public NotesEntity CreateNote(CreateNotes model, int Id)
+        public NotesEntity CreateNote(CreateNotes model, int UserId)
         {
-            NotesEntity entity = new NotesEntity();
-            entity.NotesId = Id;
-            entity.Title = model.Title;
-            entity.Description = model.Description;
-            entity.Colour = model.Colour;
-            entity.Image = model.Image;
-            entity.IsArchive = model.IsArchive;
-            entity.IsPin = model.IsPin;
-            entity.ISTrash = model.IsTrash;
-            entity.CreatedAt = DateTime.UtcNow;
-            entity.UpdatedAt = DateTime.UtcNow;
-            context.NotesTable.Add(entity);
+            NotesEntity Note = new NotesEntity();
+            Note.UserId = UserId;
+            Note.Title = model.Title;
+            Note.Description = model.Description;
+            Note.Colour = model.Colour;
+            Note.Image = model.Image;
+            Note.IsArchive = model.IsArchive;
+            Note.IsPin = model.IsPin;
+            Note.ISTrash = model.IsTrash;
+            Note.CreatedAt = DateTime.UtcNow;
+            Note.UpdatedAt = DateTime.UtcNow;
+            context.NotesTable.Add(Note);
             context.SaveChanges();
-            return entity;
+            return Note;
         }
-        public List<NotesEntity> GetAllNote(int id)
+        public List<NotesEntity> GetAllNote(int Userid)
         {
-            return context.NotesTable.Where<NotesEntity>(AllUser => AllUser.UserID == id).ToList();
+            return context.NotesTable.Where<NotesEntity>(AllUser => AllUser.UserId == Userid).ToList();
         }
 
         public NotesEntity UpdateNote(int NotesId, UpdateNotesModel model)
@@ -75,9 +75,9 @@ namespace Repository.Services
             return trash;
         }
 
-        public NotesEntity DeleteNoteOperation(int NotesId, int id)
+        public NotesEntity DeleteNoteOperation(int NotesId)
         {
-            var deleted = context.NotesTable.FirstOrDefault(o => (o.NotesId == NotesId && o.UserID == id));
+            var deleted = context.NotesTable.FirstOrDefault(person => person.NotesId == NotesId);
             if (deleted != null)
             {
                 context.NotesTable.Remove(deleted);
@@ -134,14 +134,14 @@ namespace Repository.Services
         }
 
         //Image
-        public string UploadImage(string filepath, int NotesId, int Id)
+        public string UploadImage(string filepath, int NotesId, int UserId)
         {
             try
             {
-                var filter = context.NotesTable.Where(e => e.UserID == Id);
+                var filter = context.NotesTable.Where(User => User.UserId == UserId);
                 if (filter != null)
                 {
-                    var findNotes = filter.FirstOrDefault(e => e.NotesId == NotesId);
+                    var findNotes = filter.FirstOrDefault(Note => Note.NotesId == NotesId);
                     if (findNotes != null)
                     {
                         Account account = new Account("dp4bw10zf", "296469352489476", "***************************");
