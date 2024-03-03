@@ -2,7 +2,6 @@
 using ManagerLayer.Interface;
 using Repository.Services;
 using RepositoryLayer.Enitity;
-using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -10,10 +9,10 @@ using System.Text;
 
 namespace ManagerLayer.Services
 {
-    public class NoteManager : INotesManager
+    public class NotesManager : INotesManager
     {
         private readonly INotesInterface repository;
-        public NoteManager(INotesInterface repository)
+        public NotesManager(INotesInterface repository)
         {
             this.repository = repository;
         }
@@ -41,5 +40,10 @@ namespace ManagerLayer.Services
         {
             return repository.Archive(NotesId);
         }
+        public NotesEntity Colour(int NotesId)
+        {
+            return repository.Colour(NotesId);
+        }
+
     }
 }

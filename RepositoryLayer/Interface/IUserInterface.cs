@@ -1,4 +1,5 @@
 ﻿using CommonLayer.RequestModel;
+using CommonLayer.RequestModel.LoginPageModel;
 using RepositoryLayer.Enitity;
 using System;
 using System.Collections.Generic;

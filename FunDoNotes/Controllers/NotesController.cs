@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Enitity;
-using RepositoryLayer.Entity;
 using System.Collections.Generic;
 using System;
+using static MassTransit.Monitoring.Performance.BuiltInCounters;
 
 namespace FunDoNotes.Controllers
 {
@@ -143,6 +143,32 @@ namespace FunDoNotes.Controllers
                 return BadRequest(new ResponseModel<NotesEntity> { Success = false, Message = ex.Message, Data = null });
             }
 
+        }
+        [Authorize]
+        [HttpPut]
+        [Route("Colour")]
+        public ActionResult Colour(int NotesId)
+        {
+
+            var response = noteManger.Colour(NotesId);
+            if (response != null)
+            {
+                return Ok(new ResponseModel<NotesEntity>
+                {
+                    Success = true,
+                    Message = "Colour added successfullt",
+                    Data = response
+                });
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<NotesEntity>
+                {
+                    Success = false,
+                    Message = "Failed adding colour",
+                    Data = response
+                });
+            }
         }
     }
 }

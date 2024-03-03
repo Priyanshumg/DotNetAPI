@@ -1,10 +1,8 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using CommonLayer.RequestModel.NotesModel;
+﻿using CommonLayer.RequestModel.NotesModel;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using RepositoryLayer.Context;
-using RepositoryLayer.Entity;
+using RepositoryLayer.Enitity;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -40,7 +38,7 @@ namespace Repository.Services
         }
         public List<NotesEntity> GetAllNote(int id)
         {
-            return context.NotesTable.Where<NotesEntity>(a => a.UserId == id).ToList();
+            return context.NotesTable.Where<NotesEntity>(AllUser => AllUser.UserID == id).ToList();
         }
 
         public NotesEntity UpdateNote(int NotesId, UpdateNotesModel model)
@@ -77,7 +75,7 @@ namespace Repository.Services
 
         public NotesEntity DeleteNoteOperation(int NotesId, int id)
         {
-            var deleted = context.NotesTable.FirstOrDefault(o => (o.NotesId == NotesId && o.UserId == id));
+            var deleted = context.NotesTable.FirstOrDefault(o => (o.NotesId == NotesId && o.UserID == id));
             if (deleted != null)
             {
                 context.NotesTable.Remove(deleted);
@@ -109,6 +107,17 @@ namespace Repository.Services
             {
                 throw new Exception("IsArchive not found");
             }
+        }
+        public NotesEntity Colour(int NotesId)
+        {
+            var color = context.NotesTable.FirstOrDefault(o => o.NotesId == NotesId);
+            if (color != null)
+            {
+                color.Colour = "Blue";
+                context.SaveChanges();
+            }
+            return color;
+
         }
     }
 }
