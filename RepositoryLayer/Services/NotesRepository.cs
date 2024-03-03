@@ -1,4 +1,6 @@
-﻿using CommonLayer.RequestModel.NotesModel;
+﻿using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
+using CommonLayer.RequestModel.NotesModel;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using RepositoryLayer.Context;
@@ -129,6 +131,37 @@ namespace Repository.Services
                 context.SaveChanges();
             }
             return remind;
+        }
+
+        //Image
+        public string UploadImage(string filepath, int NotesId, int Id)
+        {
+            try
+            {
+                var filter = context.NotesTable.Where(e => e.UserID == Id);
+                if (filter != null)
+                {
+                    var findNotes = filter.FirstOrDefault(e => e.NotesId == NotesId);
+                    if (findNotes != null)
+                    {
+                        Account account = new Account("dp4bw10zf", "296469352489476", "***************************");
+                        Cloudinary cloudinary = new Cloudinary(account);
+                        ImageUploadParams uploadParams = new ImageUploadParams()
+                        {
+                            File = new FileDescription(filepath),
+                            PublicId = findNotes.Title
+                        };
+                        ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
+                        findNotes.UpdatedAt = DateTime.Now;
+                        findNotes.Image = uploadResult.Url.ToString();
+                        context.SaveChanges();
+                        return "Upload Successfull";
+                    }
+                    return null;
+                }
+                else { return null; }
+            }
+            catch (Exception ex) { return null; }
         }
     }
 }
