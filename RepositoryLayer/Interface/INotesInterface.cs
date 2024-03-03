@@ -16,5 +16,6 @@ namespace RepositoryLayer.Interface
         public NotesEntity Archive(int NotesId);
         public NotesEntity Colour(int NotesId);
         public NotesEntity Reminder(int NotesId);
+        public string UploadImage(string filepath, int NotesId, int Id);
     }
 }
