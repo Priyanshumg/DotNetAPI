@@ -11,6 +11,7 @@ using MassTransit;
 using System.Threading.Tasks;
 using ManagerLayer.Services;
 using CommonLayer.Utilities;
+using CommonLayer.RequestModel.LoginPageModel;
 
 namespace FunDoNotes.Controllers
 {

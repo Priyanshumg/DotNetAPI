@@ -91,7 +91,6 @@ namespace FunDoNotes
             services.AddTransient<INotesManager, NotesManager>();
             services.AddTransient<INotesInterface, NoteRepository>();
 
-
             services.AddControllers();
 
             services.AddMassTransit(x =>
