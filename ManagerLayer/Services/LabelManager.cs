@@ -25,5 +25,10 @@ namespace ManagerLayer.Services
         {
             return LabelRepository.GetNoteIdByName(noteName);
         }
+
+        public List<LabelEntity> DisplayAllLabel()
+        {
+            return LabelRepository.DisplayAllLabel();
+        }
     }
 }

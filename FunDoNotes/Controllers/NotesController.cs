@@ -240,5 +240,25 @@ namespace FunDoNotes.Controllers
                 return BadRequest(new ResponseModel<LabelEntity> { Success = false, Message = "Failed to create label", Data = null });
             }
         }
+        [Authorize]
+        [HttpGet("DisplayAllLabels")]
+        public IActionResult DisplayAllLabels()
+        {
+            var response = labelManager.DisplayAllLabel();
+            if (response != null)
+            {
+                var responseData = new ResponseModel<List<LabelEntity>>
+                {
+                    Success = true,
+                    Message = "Displayed all Label successfully",
+                    Data = response
+                };
+                return Ok(responseData);
+            }
+            else
+            {
+                return NotFound("No label found based on the provided criteria.");
+            }
+        }
     }
 }
