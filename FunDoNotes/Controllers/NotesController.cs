@@ -260,5 +260,19 @@ namespace FunDoNotes.Controllers
                 return NotFound("No label found based on the provided criteria.");
             }
         }
+        [HttpPut]
+        [Route("Assign/{labelId}/{noteId}")]
+        public ActionResult AssignLabel(int labelId, int noteId)
+        {
+            var assignedLabel = labelManager.AssignLabel(labelId, noteId);
+            if (assignedLabel != null)
+            {
+                return Ok(new ResponseModel<LabelEntity> { Success = true, Message = "Label assigned successfully", Data = assignedLabel });
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<LabelEntity> { Success = false, Message = "Failed to assign label", Data = null });
+            }
+        }
     }
 }
