@@ -11,5 +11,6 @@ namespace ManagerLayer.Interface
         public LabelEntity CreateLabel(LabelModel model, int noteId);
         public int GetNoteIdByName(string noteName);
         public List<LabelEntity> DisplayAllLabel();
+        public LabelEntity AssignLabel(int labelId, int noteId);
     }
 }
