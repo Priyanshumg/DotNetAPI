@@ -4,6 +4,7 @@ using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -49,6 +50,11 @@ namespace RepositoryLayer.Services
             {
                 return null;
             }
+        }
+        public List<LabelEntity> DisplayAllLabel()
+        {
+            LabelModel label = new LabelModel();
+            return context.LabelTable.ToList();
         }
     }
 }
