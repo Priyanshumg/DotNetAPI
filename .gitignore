@@ -176,3 +176,6 @@ ASALocalRun/
 .mfractor/
 # Local History for Visual Studio
 .localhistory/
+/FunDoNotes/bin/Debug/netcoreapp3.1/FunDoNotes.dll
+/FunDoNotes/bin/Debug/netcoreapp3.1/ManagerLayer.dll
+/FunDoNotes/bin/Debug/netcoreapp3.1/RepositoryLayer.dll
