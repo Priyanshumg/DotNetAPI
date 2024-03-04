@@ -56,5 +56,49 @@ namespace RepositoryLayer.Services
             LabelModel label = new LabelModel();
             return context.LabelTable.ToList();
         }
+
+        public LabelEntity AssignLabel(int labelId, int noteId)
+        {
+            var labelToAssign = context.LabelTable.FirstOrDefault(label => label.LabelId == labelId);
+            var noteToUpdate = context.NotesTable.FirstOrDefault(note => note.NotesId == noteId);
+            if (labelToAssign != null && noteToUpdate != null)
+            {
+                noteToUpdate.LabelId = labelToAssign.LabelId;
+                context.SaveChanges();
+                return labelToAssign;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public LabelEntity DeleteLabel(int labelId)
+        {
+            var labelToDelete = context.LabelTable.FirstOrDefault(l => l.LabelId == labelId);
+            if (labelToDelete != null)
+            {
+                context.LabelTable.Remove(labelToDelete);
+                context.SaveChanges();
+                return labelToDelete;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public LabelEntity UpdateLabel(int labelId, LabelModel model)
+        {
+            var labelToUpdate = context.LabelTable.FirstOrDefault(l => l.LabelId == labelId);
+            if (labelToUpdate != null && model != null && !string.IsNullOrEmpty(model.LabelName))
+            {
+                labelToUpdate.LabelName = model.LabelName;
+                context.SaveChanges();
+                return labelToUpdate;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

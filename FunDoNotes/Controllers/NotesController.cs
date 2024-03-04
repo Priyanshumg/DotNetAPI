@@ -260,5 +260,47 @@ namespace FunDoNotes.Controllers
                 return NotFound("No label found based on the provided criteria.");
             }
         }
+        [HttpPut]
+        [Route("Assign/{labelId}/{noteId}")]
+        public ActionResult AssignLabel(int labelId, int noteId)
+        {
+            var assignedLabel = labelManager.AssignLabel(labelId, noteId);
+            if (assignedLabel != null)
+            {
+                return Ok(new ResponseModel<LabelEntity> { Success = true, Message = "Label assigned successfully", Data = assignedLabel });
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<LabelEntity> { Success = false, Message = "Failed to assign label", Data = null });
+            }
+        }
+        [HttpDelete]
+        [Route("Delete/{labelId}")]
+        public ActionResult DeleteLabel(int labelId)
+        {
+            var deletedLabel = labelManager.DeleteLabel(labelId);
+            if (deletedLabel != null)
+            {
+                return Ok(new ResponseModel<LabelEntity> { Success = true, Message = "Label deleted successfully", Data = deletedLabel });
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<LabelEntity> { Success = false, Message = "Failed to delete label", Data = null });
+            }
+        }
+        [HttpPut]
+        [Route("Update/{labelId}")]
+        public ActionResult UpdateLabel(int labelId, LabelModel model)
+        {
+            var updatedLabel = labelManager.UpdateLabel(labelId, model);
+            if (updatedLabel != null)
+            {
+                return Ok(new ResponseModel<LabelEntity> { Success = true, Message = "Label updated successfully", Data = updatedLabel });
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<LabelEntity> { Success = false, Message = "Failed to update label", Data = null });
+            }
+        }
     }
 }
