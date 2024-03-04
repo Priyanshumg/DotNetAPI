@@ -35,5 +35,13 @@ namespace ManagerLayer.Services
         {
             return LabelRepository.AssignLabel(labelId, noteId);
         }
+        public LabelEntity DeleteLabel(int labelId)
+        {
+            return LabelRepository.DeleteLabel(labelId);
+        }
+        public LabelEntity UpdateLabel(int labelId, LabelModel model)
+        {
+            return LabelRepository.UpdateLabel(labelId, model);
+        }
     }
 }
