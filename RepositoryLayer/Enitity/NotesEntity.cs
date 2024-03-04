@@ -1,8 +1,9 @@
-﻿using System;
+﻿using RepositoryLayer.Enitity;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RepositoryLayer.Enitity
+namespace RepositoryLayer.Entity
 {
     public class NotesEntity
     {
@@ -27,7 +28,8 @@ namespace RepositoryLayer.Enitity
         public UserEntity User { get; set; }
 
         [ForeignKey("Label")]
-        public int LabelId { get; set; }
+        public int? LabelId { get; set; } // Nullable foreign key
         public LabelEntity Label { get; set; }
+
     }
 }

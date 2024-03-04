@@ -11,6 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
+using RepositoryLayer.Entity;
+using CommonLayer.RequestModel.LabelModel;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Repository.Services
 {
@@ -110,7 +114,7 @@ namespace Repository.Services
                 throw new Exception("IsArchive not found");
             }
         }
-        public NotesEntity Colour(UpdateNotesModel model, int NotesId)
+        public NotesEntity Colour(CreateNotes model, int NotesId)
         {
             var color = context.NotesTable.FirstOrDefault(o => o.NotesId == NotesId);
             if (color != null)
@@ -162,14 +166,6 @@ namespace Repository.Services
                 else { return null; }
             }
             catch (Exception ex) { return null; }
-        }
-    }
-    public class Label : ILabelNotesRepository
-    {
-        private readonly UserContext context;
-        public Label(UserContext context)
-        {
-            this.context = context;
         }
     }
 }

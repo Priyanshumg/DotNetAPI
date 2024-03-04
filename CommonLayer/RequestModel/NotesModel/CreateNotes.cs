@@ -16,5 +16,6 @@ namespace CommonLayer.RequestModel.NotesModel
         public bool IsTrash { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public int LabelID { get; set; }
     }
 }

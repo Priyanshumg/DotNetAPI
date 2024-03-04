@@ -90,6 +90,8 @@ namespace FunDoNotes
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<INotesManager, NotesManager>();
             services.AddTransient<INotesInterface, NoteRepository>();
+            services.AddScoped<ILabelManager, LabelManagers>();
+            services.AddTransient<ILabelInterface, LabelRepository>();
 
             services.AddControllers();
 

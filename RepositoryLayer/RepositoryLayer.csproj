@@ -25,6 +25,10 @@
     <Compile Remove="Migrations\20240224041021_UserModified.Designer.cs" />
     <Compile Remove="Migrations\20240224041714_UserModified.cs" />
     <Compile Remove="Migrations\20240224041714_UserModified.Designer.cs" />
+    <Compile Remove="Migrations\20240303144914_LabelNoteRelation.cs" />
+    <Compile Remove="Migrations\20240303144914_LabelNoteRelation.Designer.cs" />
+    <Compile Remove="Migrations\20240303145410_LabelNoteRelation.cs" />
+    <Compile Remove="Migrations\20240303145410_LabelNoteRelation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
