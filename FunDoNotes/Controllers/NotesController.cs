@@ -10,6 +10,11 @@ using RepositoryLayer.Enitity;
 using System.Collections.Generic;
 using System;
 using static MassTransit.Monitoring.Performance.BuiltInCounters;
+using RepositoryLayer.Entity;
+using CommonLayer.RequestModel.LabelModel;
+using Microsoft.IdentityModel.Tokens;
+using RepositoryLayer.Migrations;
+using RepositoryLayer.Interface;
 
 namespace FunDoNotes.Controllers
 {
@@ -18,9 +23,11 @@ namespace FunDoNotes.Controllers
     public class NoteController : ControllerBase
     {
         private readonly INotesManager noteManger;
-        public NoteController(INotesManager noteManger)
+        private readonly ILabelManager labelManager;
+        public NoteController(INotesManager noteManger,ILabelManager labelManager)
         {
             this.noteManger = noteManger;
+            this.labelManager = labelManager;
         }
         [Authorize]
         [HttpPost]
@@ -97,7 +104,7 @@ namespace FunDoNotes.Controllers
         [Authorize]
         [HttpDelete]
         [Route("Delete")]
-        public ActionResult DeleteNote(CreateNotes model, int NotesId)
+        public ActionResult DeleteNote(int NotesId)
         {
             try
             {
@@ -209,6 +216,28 @@ namespace FunDoNotes.Controllers
             else
             {
                 return BadRequest(new ResponseModel<string> { Success = false, Message = "Upload Image Failed", Data = response });
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("AddLabel")]
+        public ActionResult CreateLabel(LabelModel model)
+        {
+            int noteId = labelManager.GetNoteIdByName(model.LabelName);
+            if (noteId == 0)
+            {
+                return BadRequest(new ResponseModel<string> { Success = false, Message = $"Note with name '{model.LabelName}' not found", Data = null });
+            }
+
+            var createdLabel = labelManager.CreateLabel(model, noteId);
+            if (createdLabel != null)
+            {
+                return Ok(new ResponseModel<LabelEntity> { Success = true, Message = "Label created successfully", Data = createdLabel });
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<LabelEntity> { Success = false, Message = "Failed to create label", Data = null });
             }
         }
     }

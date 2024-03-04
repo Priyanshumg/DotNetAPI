@@ -1,5 +1,7 @@
-﻿using CommonLayer.RequestModel.NotesModel;
+﻿using CommonLayer.RequestModel.LabelModel;
+using CommonLayer.RequestModel.NotesModel;
 using RepositoryLayer.Enitity;
+using RepositoryLayer.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,8 +20,5 @@ namespace ManagerLayer.Interface
         public NotesEntity Reminder(CreateNotes model, int NotesId);
         public string UploadImage(string filepath, int NotesId, int Id);
     }
-    public interface ILabelManager
-    {
-
-    }
 }
+

@@ -1,7 +1,9 @@
-﻿using CommonLayer.RequestModel.NotesModel;
+﻿using CommonLayer.RequestModel.LabelModel;
+using CommonLayer.RequestModel.NotesModel;
 using ManagerLayer.Interface;
 using Repository.Services;
 using RepositoryLayer.Enitity;
+using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -52,9 +54,5 @@ namespace ManagerLayer.Services
         {
             return repository.UploadImage(filepath, NotesId, Id);
         }
-    }
-    public class LabelManager : ILabelManager
-    {
-        private readonly INotesInterface repository;
     }
 }
