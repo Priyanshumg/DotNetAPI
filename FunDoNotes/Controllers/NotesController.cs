@@ -274,5 +274,36 @@ namespace FunDoNotes.Controllers
                 return BadRequest(new ResponseModel<LabelEntity> { Success = false, Message = "Failed to assign label", Data = null });
             }
         }
+<<<<<<< HEAD
+=======
+        [HttpDelete]
+        [Route("Delete/{labelId}")]
+        public ActionResult DeleteLabel(int labelId)
+        {
+            var deletedLabel = labelManager.DeleteLabel(labelId);
+            if (deletedLabel != null)
+            {
+                return Ok(new ResponseModel<LabelEntity> { Success = true, Message = "Label deleted successfully", Data = deletedLabel });
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<LabelEntity> { Success = false, Message = "Failed to delete label", Data = null });
+            }
+        }
+        [HttpPut]
+        [Route("Update/{labelId}")]
+        public ActionResult UpdateLabel(int labelId, LabelModel model)
+        {
+            var updatedLabel = labelManager.UpdateLabel(labelId, model);
+            if (updatedLabel != null)
+            {
+                return Ok(new ResponseModel<LabelEntity> { Success = true, Message = "Label updated successfully", Data = updatedLabel });
+            }
+            else
+            {
+                return BadRequest(new ResponseModel<LabelEntity> { Success = false, Message = "Failed to update label", Data = null });
+            }
+        }
+>>>>>>> Label/DeleteLabel
     }
 }

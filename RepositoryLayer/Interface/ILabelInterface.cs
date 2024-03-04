@@ -12,5 +12,11 @@ namespace RepositoryLayer.Interface
         public int GetNoteIdByName(string noteName);
         public List<LabelEntity> DisplayAllLabel();
         public LabelEntity AssignLabel(int labelId, int noteId);
+<<<<<<< HEAD
+=======
+        public LabelEntity DeleteLabel(int labelId);
+
+        public LabelEntity UpdateLabel(int labelId, LabelModel model);
+>>>>>>> Label/DeleteLabel
     }
 }
