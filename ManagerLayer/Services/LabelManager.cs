@@ -25,12 +25,10 @@ namespace ManagerLayer.Services
         {
             return LabelRepository.GetNoteIdByName(noteName);
         }
-
         public List<LabelEntity> DisplayAllLabel()
         {
             return LabelRepository.DisplayAllLabel();
         }
-
         public LabelEntity AssignLabel(int labelId, int noteId)
         {
             return LabelRepository.AssignLabel(labelId, noteId);
