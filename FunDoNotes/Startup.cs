@@ -92,6 +92,8 @@ namespace FunDoNotes
             services.AddTransient<INotesInterface, NoteRepository>();
             services.AddScoped<ILabelManager, LabelManagers>();
             services.AddTransient<ILabelInterface, LabelRepository>();
+            services.AddTransient<IColaborationManager, ColaborationManager>();
+            services.AddTransient<IColaborationInterface, ColaborationRepository>();
 
             services.AddControllers();
 
