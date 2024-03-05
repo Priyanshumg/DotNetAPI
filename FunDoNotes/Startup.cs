@@ -1,3 +1,4 @@
+using CommonLayer.RequestModel.ColaborationModel;
 using FunDoNotes;
 using ManagerLayer.Interface;
 using ManagerLayer.Services;
@@ -92,6 +93,9 @@ namespace FunDoNotes
             services.AddTransient<INotesInterface, NoteRepository>();
             services.AddScoped<ILabelManager, LabelManagers>();
             services.AddTransient<ILabelInterface, LabelRepository>();
+            services.AddTransient<IColaborationManager, ColaborationManager>();
+            services.AddTransient<IColaborationInterface, ColaborationRepository>();
+            services.AddTransient<ColaborationModel>();
 
             services.AddControllers();
 

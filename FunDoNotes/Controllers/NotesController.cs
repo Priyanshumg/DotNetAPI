@@ -302,5 +302,7 @@ namespace FunDoNotes.Controllers
                 return BadRequest(new ResponseModel<LabelEntity> { Success = false, Message = "Failed to update label", Data = null });
             }
         }
+
+
     }
 }
