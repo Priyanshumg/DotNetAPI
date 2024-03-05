@@ -81,13 +81,23 @@ namespace RepositoryLayer.Services
         }
         public ColabEntity RemoveColaborator(int NoteIdToRemoveFromColab, int UserIdToRemoveFromColab)
         {
-            ColabEntity model = context.ColabTable.Where(
-                user => user.User.UserId == UserIdToRemoveFromColab);
-            context.Remove(model);
-            context.SaveChanges();
-
-            
-            return model;
+            var colabToRemove = context.ColabTable
+                .Where(
+                c => c.NoteId == NoteIdToRemoveFromColab 
+                && 
+                c.UserIdToAddColab == UserIdToRemoveFromColab).FirstOrDefault();
+            var notesToRemove = context.NotesTable.Where(n => n.UserId == UserIdToRemoveFromColab).FirstOrDefault();
+            if (colabToRemove != null && notesToRemove != null)
+            {
+                context.Remove(colabToRemove);
+                context.NotesTable.Remove(notesToRemove);
+                context.SaveChanges();
+                return colabToRemove;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
