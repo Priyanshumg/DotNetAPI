@@ -85,6 +85,8 @@ namespace RepositoryLayer.Services
                 user => user.User.UserId == UserIdToRemoveFromColab);
             context.Remove(model);
             context.SaveChanges();
+
+            
             return model;
         }
     }
