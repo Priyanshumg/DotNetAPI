@@ -10,5 +10,6 @@ namespace RepositoryLayer.Interface
     {
         public ColabEntity AddColaboratory(int userIdToColab, int NoteIdToColab);
         public NotesEntity addNote(int noteIdToColab, int userIdToColab);
+        public ColabEntity RemoveColaborator(int NoteIdToRemoveFromColab, int UserIdToRemoveFromColab);
     }
 }
