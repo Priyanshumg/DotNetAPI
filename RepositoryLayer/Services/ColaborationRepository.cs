@@ -13,6 +13,8 @@ using System.Security.Cryptography.X509Certificates;
 using static System.Net.Mime.MediaTypeNames;
 using System.Drawing;
 using System.IO.Compression;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace RepositoryLayer.Services
 {
@@ -77,6 +79,25 @@ namespace RepositoryLayer.Services
             // Return null if the original note was not found
             return null;
         }
-
+        public ColabEntity RemoveColaborator(int NoteIdToRemoveFromColab, int UserIdToRemoveFromColab)
+        {
+            var colabToRemove = context.ColabTable
+                .Where(
+                c => c.NoteId == NoteIdToRemoveFromColab 
+                && 
+                c.UserIdToAddColab == UserIdToRemoveFromColab).FirstOrDefault();
+            var notesToRemove = context.NotesTable.Where(n => n.UserId == UserIdToRemoveFromColab).FirstOrDefault();
+            if (colabToRemove != null && notesToRemove != null)
+            {
+                context.Remove(colabToRemove);
+                context.NotesTable.Remove(notesToRemove);
+                context.SaveChanges();
+                return colabToRemove;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

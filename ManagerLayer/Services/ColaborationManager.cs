@@ -24,5 +24,9 @@ namespace ManagerLayer.Services
         {
             return repository.addNote(noteIdToColab, userIdToColab);
         }
+        public ColabEntity RemoveColaborator(int NoteIdToRemoveFromColab, int UserIdToRemoveFromColab)
+        {
+            return repository.RemoveColaborator(NoteIdToRemoveFromColab, UserIdToRemoveFromColab);
+        }
     }
 }
