@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RepositoryLayer.Interface
 {
-    public interface ColaborationInterface
+    public interface IColaborationInterface
     {
 
     }
